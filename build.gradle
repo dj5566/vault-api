@@ -1,5 +1,8 @@
 plugins {
     id 'java'
+    id 'idea'
+    id 'eclipse'
+    id 'net.minecrell.licenser' version '0.3'
 }
 
 group = 'org.natrolite'
@@ -25,6 +28,12 @@ dependencies {
 
 sourceCompatibility = javaVersion
 targetCompatibility = javaVersion
+
+license {
+    header = file('HEADER')
+    include '**/*.java'
+    newLine = true
+}
 
 processResources {
     from 'LICENSE'
