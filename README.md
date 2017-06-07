@@ -1,22 +1,23 @@
-# VaultAPI - Abstraction Library API for Bukkit Plugins - ![Travis-ci](https://travis-ci.org/MilkBowl/VaultAPI.svg?branch=master)
+# VaultAPI - Abstraction Library API for Bukkit Plugins - [![Build Status](https://travis-ci.org/natrolite/vault-api.svg?branch=master)](https://travis-ci.org/natrolite/vault-api)
 
 How to use with maven: note that the VaultAPI version is 2 numerals, unlike Vault versions which are 3.  The 2 numerals in the VaultAPI will always correspond to the 2 beginning numerals in a Vault version to make it clear what versions your plugin will for sure work with.
+```xml
+<repositories>
+    <repository>
+	    <id>vault-repo</id>
+	    <url>http://nexus.hc.to/content/repositories/pub_releases</url>
+    </repository>
+</repositories>
 ```
-    <repositories>
-        <repository>
-	        <id>vault-repo</id>
-	        <url>http://nexus.hc.to/content/repositories/pub_releases</url>
-        </repository>
-    </repositories>
-    <dependencies>
-        <dependency>
-            <groupId>net.milkbowl.vault</groupId>
-            <artifactId>VaultAPI</artifactId>
-            <version>1.6</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
-
+```xml
+<dependencies>
+    <dependency>
+        <groupId>net.milkbowl.vault</groupId>
+        <artifactId>VaultAPI</artifactId>
+        <version>1.6</version>
+        <scope>provided</scope>
+    </dependency>
+</dependencies>
 ```
 
 ## Why Vault?
@@ -89,7 +90,7 @@ public class ExamplePlugin extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
-        setupPermissions();
+        setupPermission();
         setupChat();
     }
     
@@ -111,7 +112,7 @@ public class ExamplePlugin extends JavaPlugin {
         return chat != null;
     }
     
-    private boolean setupPermissions() {
+    private boolean setupPermission() {
         RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
         perms = rsp.getProvider();
         return perms != null;
@@ -148,11 +149,11 @@ public class ExamplePlugin extends JavaPlugin {
         }
     }
     
-    public static Economy getEcononomy() {
+    public static Economy getEconomy() {
         return econ;
     }
     
-    public static Permission getPermissions() {
+    public static Permission getPermission() {
         return perms;
     }
     
