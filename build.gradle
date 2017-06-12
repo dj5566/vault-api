@@ -8,7 +8,25 @@ plugins {
 group = 'org.natrolite'
 description =
         'Vault is a Permissions and Economy API to allow plugins to more easily hook ' +
-        'into these systems without needing to hook each individual system themselves.'
+                'into these systems without needing to hook each individual system themselves.'
+
+ext {
+    homepage = 'https://natrolite.org/'
+
+    licenseName = 'GNU Lesser General Public License (LGPL)'
+    licenseUrl = 'https://www.gnu.org/licenses/lgpl.txt'
+    licenseDist = 'repo'
+
+    issueSystem = 'GitHub Issues'
+    issueUrl = 'https://github.com/natrolite/vault-api/issues'
+
+    ciSystem = 'Travis CI'
+    ciUrl = 'https://travis-ci.org/natrolite/vault-api'
+
+    scmUrl = 'https://github.com/natrolite/vault-api'
+    scmConnection = 'scm:git:git://github.com/natrolite/vault-api.git'
+    scmDevConnection = 'scm:git:ssh://github.com:natrolite/vault-api.git'
+}
 
 ext {
     javaVersion = '1.7'
@@ -19,6 +37,7 @@ repositories {
     mavenCentral()
     maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    maven { url 'https://repo.natrolite.org/repository/maven-releases/' }
 }
 
 dependencies {
@@ -65,6 +84,8 @@ artifacts {
     archives sourceJar
     archives javadocJar
 }
+
+apply from: 'gradle/deploy.gradle'
 
 task wrapper(type: Wrapper) {
     gradleVersion = '3.5'
