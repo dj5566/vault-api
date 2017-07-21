@@ -5,29 +5,6 @@ plugins {
     id 'net.minecrell.licenser' version '0.3'
 }
 
-group = 'org.natrolite'
-description =
-        'Vault is a Permissions and Economy API to allow plugins to more easily hook ' +
-                'into these systems without needing to hook each individual system themselves.'
-
-ext {
-    homepage = 'https://natrolite.org/'
-
-    licenseName = 'GNU Lesser General Public License (LGPL)'
-    licenseUrl = 'https://www.gnu.org/licenses/lgpl.txt'
-    licenseDist = 'repo'
-
-    issueSystem = 'GitHub Issues'
-    issueUrl = 'https://github.com/natrolite/vault-api/issues'
-
-    ciSystem = 'Travis CI'
-    ciUrl = 'https://travis-ci.org/natrolite/vault-api'
-
-    scmUrl = 'https://github.com/natrolite/vault-api'
-    scmConnection = 'scm:git:git://github.com/natrolite/vault-api.git'
-    scmDevConnection = 'scm:git:ssh://github.com:natrolite/vault-api.git'
-}
-
 repositories {
     mavenCentral()
     maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
