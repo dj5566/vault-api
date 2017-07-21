@@ -28,11 +28,6 @@ ext {
     scmDevConnection = 'scm:git:ssh://github.com:natrolite/vault-api.git'
 }
 
-ext {
-    javaVersion = '1.7'
-    encoding = 'UTF-8'
-}
-
 repositories {
     mavenCentral()
     maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
@@ -45,8 +40,20 @@ dependencies {
     testCompile group: 'org.bukkit', name: 'bukkit', version: '1.9-R0.1-SNAPSHOT'
 }
 
-sourceCompatibility = javaVersion
-targetCompatibility = javaVersion
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+compileJava {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+    options.encoding = 'UTF-8'
+}
+
+compileTestJava {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+    options.encoding = 'UTF-8'
+}
 
 license {
     header = file('HEADER.txt')
@@ -57,18 +64,6 @@ license {
 processResources {
     from 'LICENSE.txt'
     from 'THIRD-PARTY-LICENSES.txt'
-}
-
-compileJava {
-    sourceCompatibility = javaVersion
-    targetCompatibility = javaVersion
-    options.encoding = encoding
-}
-
-compileTestJava {
-    sourceCompatibility = javaVersion
-    targetCompatibility = javaVersion
-    options.encoding = encoding
 }
 
 task sourceJar(type: Jar) {
@@ -86,8 +81,8 @@ artifacts {
     archives javadocJar
 }
 
-apply from: 'gradle/deploy.gradle'
-
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.5'
+    gradleVersion = '4.0'
 }
+
+apply from: 'gradle/deploy.gradle'
