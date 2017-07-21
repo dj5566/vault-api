@@ -49,13 +49,14 @@ sourceCompatibility = javaVersion
 targetCompatibility = javaVersion
 
 license {
-    header = file('HEADER')
+    header = file('HEADER.txt')
     include '**/*.java'
     newLine = true
 }
 
 processResources {
-    from 'LICENSE'
+    from 'LICENSE.txt'
+    from 'THIRD-PARTY-LICENSES.txt'
 }
 
 compileJava {

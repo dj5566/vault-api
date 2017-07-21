@@ -1,7 +1,8 @@
 /*
  * This file is part of Vault.
  *
- * Copyright (c) 2017 Lukas Nehrke
+ * Copyright (C) 2011 Morgan Humes <morgan@lanaddict.com>
+ * Copyright (C) 2017 Lukas Nehrke
  *
  * Vault is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -23,13 +24,11 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.EnumSet;
 import java.util.Set;
-
+import net.milkbowl.vault.item.ItemInfo;
+import net.milkbowl.vault.item.Items;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.junit.Test;
-
-import net.milkbowl.vault.item.ItemInfo;
-import net.milkbowl.vault.item.Items;
 
 
 @SuppressWarnings("deprecation")
