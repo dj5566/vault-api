@@ -9,6 +9,26 @@ jdk:
 
 script: ./gradlew build checkstyle -Dorg.gradle.daemon=false
 
+deploy:
+  - provider: releases
+    api_key:
+      secure: "qZlSw8Bv62LP4E8IWyM1W8oKMGmXNqzqWuLzrI4+e0NbajupFPjhGTD16ZiSOKDaJM+uwmORzrMULkqm6J3+MnVzOPZyP7WkvTkRrL8UZaZ0YtWj6hfkYeprbfTjnGtOUWBVLgy5iaqP5tuS9Us93CqknG0hEF1YKmhqEVFXSoYopshFX/bGUJLJplRrghQ8bk7sPSEOVExazWNKC1yj9BuSGm7SwzBb5LGFf/gCpi4ZNmj2HhnLHyqv7vXKWCMhEOiDvWSOa8wLob+BkkdgA1FmrwD+WRg44HHkIGKjOlo2v1LNqbuJNV7O3Nlwr8cm6JhLq7JmU82uSrfdC6OkL3MjBY5sTmKncWRsM80yD/maMgBNn2ye0nSxuhmQP5Ukx2pv0m/aB+onWG4PC2d2YUU65ek2R/BieygXKakdEvciwoXeBE352baTpDhwwwqKcx5KvhZPEkFCLX6RaWQzvgc/SdZJNTfYfObDd0xrssmI2N1tRS6BTT1YAMKCjm1EX5SRz9Ic6mQ5dkfowH9lUsgDncO7/gkeeA4DPRJRwrwJ0cI39xNMWaVPfe/SXwCuJvjD5SQ53PKd5OfDO783ydmx4f/my5vXq/ZiuBsm2gkVfrlisjMWTlBdguw/nFtv5dNzRxiGsn+6tR8Vq0i0OHel+VFHwvMsz8YreAMTDe4="
+    skip_cleanup: true
+    file_glob: true
+    file:
+      - "build/libs/*.jar"
+    on:
+      tags: true
+      jdk: oraclejdk8
+      repo: natrolite/vault-api
+  - privider: script
+    skip_cleanup: true
+    script: ./gradlew publish -PdeployUrl="${DEPLOY_URL}" -PdeployUser="${DEPLOY_USER}" -PdeployPass="${DEPLOY_PASS}"
+    on:
+      tags: true
+      jdk: oraclejdk8
+      repo: natrolite/vault-api
+
 branches:
   except:
     - gh-pages
