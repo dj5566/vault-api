@@ -8,7 +8,7 @@ plugins {
 
 allprojects {
   group = 'org.natrolite'
-  version = '1.6.1'
+  version = '1.6.1.1'
   description = 'Vault is a Permissions and Economy API'
 }
 
