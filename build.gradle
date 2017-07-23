@@ -6,6 +6,12 @@ plugins {
     id 'net.minecrell.licenser' version '0.3'
 }
 
+allprojects {
+    group = 'org.natrolite'
+    version = '1.6.1'
+    description = 'Vault is a Permissions and Economy API'
+}
+
 repositories {
     mavenCentral()
     maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
