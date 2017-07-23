@@ -1,58 +1,58 @@
 apply plugin: 'maven-publish'
 
 ext.isRelease = {
-    return !project.version.endsWith("-SNAPSHOT")
+  return !project.version.endsWith("-SNAPSHOT")
 }
 
 publishing {
-    repositories {
-        if (project.hasProperty("deployUrl")) {
-            maven {
-                credentials {
-                    username = "${deployUser}"
-                    password = "${deployPass}"
-                }
-                url = String.format("${deployUrl}", isRelease ? 'releases' : 'snapshots')
-            }
+  repositories {
+    if (project.hasProperty("deployUrl")) {
+      maven {
+        credentials {
+          username = "${deployUser}"
+          password = "${deployPass}"
         }
+        url = String.format("${deployUrl}", isRelease ? 'releases' : 'snapshots')
+      }
     }
+  }
 
-    publications {
-        maven(MavenPublication) {
-            from components.java
-            pom.withXml {
-                asNode().children().last() + {
-                    resolveStrategy = DELEGATE_FIRST
+  publications {
+    maven(MavenPublication) {
+      from components.java
+      pom.withXml {
+        asNode().children().last() + {
+          resolveStrategy = DELEGATE_FIRST
 
-                    name 'VaultAPI'
-                    description project.description
-                    url 'https://natrolite.org/'
+          name 'VaultAPI'
+          description project.description
+          url 'https://natrolite.org/'
 
-                    ciManagement {
-                        system 'Travis CI'
-                        url 'https://travis-ci.org/natrolite/vault-api'
-                    }
+          ciManagement {
+            system 'Travis CI'
+            url 'https://travis-ci.org/natrolite/vault-api'
+          }
 
-                    issueManagement {
-                        system 'GitHub Issues'
-                        url 'https://github.com/natrolite/vault-api/issues'
-                    }
+          issueManagement {
+            system 'GitHub Issues'
+            url 'https://github.com/natrolite/vault-api/issues'
+          }
 
-                    licenses {
-                        license {
-                            name 'GNU Lesser General Public License (LGPL)'
-                            url 'https://www.gnu.org/licenses/lgpl.txt'
-                            distribution 'repo'
-                        }
-                    }
-
-                    scm {
-                        url 'https://github.com/natrolite/vault-api'
-                        connection 'scm:git:git://github.com/natrolite/vault-api.git'
-                        developerConnection 'scm:git:ssh://github.com:natrolite/vault-api.git'
-                    }
-                }
+          licenses {
+            license {
+              name 'GNU Lesser General Public License (LGPL)'
+              url 'https://www.gnu.org/licenses/lgpl.txt'
+              distribution 'repo'
             }
+          }
+
+          scm {
+            url 'https://github.com/natrolite/vault-api'
+            connection 'scm:git:git://github.com/natrolite/vault-api.git'
+            developerConnection 'scm:git:ssh://github.com:natrolite/vault-api.git'
+          }
         }
+      }
     }
+  }
 }

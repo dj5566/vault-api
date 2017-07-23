@@ -1,89 +1,89 @@
 plugins {
-    id 'java'
-    id 'idea'
-    id 'eclipse'
-    id 'checkstyle'
-    id 'net.minecrell.licenser' version '0.3'
+  id 'java'
+  id 'idea'
+  id 'eclipse'
+  id 'checkstyle'
+  id 'net.minecrell.licenser' version '0.3'
 }
 
 allprojects {
-    group = 'org.natrolite'
-    version = '1.6.1'
-    description = 'Vault is a Permissions and Economy API'
+  group = 'org.natrolite'
+  version = '1.6.1'
+  description = 'Vault is a Permissions and Economy API'
 }
 
 repositories {
-    mavenCentral()
-    maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
-    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
-    maven { url 'https://repo.natrolite.org/repository/maven-releases/' }
+  mavenCentral()
+  maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+  maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+  maven { url 'https://repo.natrolite.org/repository/maven-releases/' }
 }
 
 dependencies {
-    compileOnly group: 'org.bukkit', name: 'bukkit', version: '1.9-R0.1-SNAPSHOT'
-    testCompile group: 'org.bukkit', name: 'bukkit', version: '1.9-R0.1-SNAPSHOT'
+  compileOnly group: 'org.bukkit', name: 'bukkit', version: '1.9-R0.1-SNAPSHOT'
+  testCompile group: 'org.bukkit', name: 'bukkit', version: '1.9-R0.1-SNAPSHOT'
 }
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
 compileJava {
-    sourceCompatibility = '1.8'
-    targetCompatibility = '1.8'
-    options.encoding = 'UTF-8'
+  sourceCompatibility = '1.8'
+  targetCompatibility = '1.8'
+  options.encoding = 'UTF-8'
 }
 
 compileTestJava {
-    sourceCompatibility = '1.8'
-    targetCompatibility = '1.8'
-    options.encoding = 'UTF-8'
+  sourceCompatibility = '1.8'
+  targetCompatibility = '1.8'
+  options.encoding = 'UTF-8'
 }
 
 checkstyle {
-    toolVersion = '8.0'
-    configFile = file('checkstyle.xml')
+  toolVersion = '8.0'
+  configFile = file('checkstyle.xml')
 }
 
 license {
-    header = file('HEADER.txt')
-    include '**/*.java'
-    newLine = true
+  header = file('HEADER.txt')
+  include '**/*.java'
+  newLine = true
 }
 
 processResources {
-    from 'LICENSE.txt'
-    from 'THIRD-PARTY-LICENSES.txt'
+  from 'LICENSE.txt'
+  from 'THIRD-PARTY-LICENSES.txt'
 }
 
 task sourceJar(type: Jar) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
+  classifier = 'sources'
+  from sourceSets.main.allSource
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
+  classifier = 'javadoc'
+  from javadoc.destinationDir
 }
 
 artifacts {
-    archives sourceJar
-    archives javadocJar
+  archives sourceJar
+  archives javadocJar
 }
 
 task checkstyle(dependsOn: tasks.withType(Checkstyle))
 
 gradle.taskGraph.whenReady { TaskExecutionGraph graph ->
-    if (!graph.allTasks.contains(tasks.checkstyle)) {
-        graph.allTasks.findAll {
-            it.name.startsWith('checkstyle')
-        }.each {
-            it.enabled = false
-        }
+  if (!graph.allTasks.contains(tasks.checkstyle)) {
+    graph.allTasks.findAll {
+      it.name.startsWith('checkstyle')
+    }.each {
+      it.enabled = false
     }
+  }
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.0'
+  gradleVersion = '4.0'
 }
 
 apply from: 'gradle/deploy.gradle'
